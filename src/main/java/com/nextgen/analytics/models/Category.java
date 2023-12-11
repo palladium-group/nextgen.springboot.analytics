@@ -13,21 +13,25 @@ public class Category {
 
     private UUID tenantId;
     private String name;
+    private UUID parent;
+    private String url;
     private String icon;
     private String color;
-    private Boolean hasChildren;
+    private Integer menuOrder;
 
     public Category() {
         super();
     }
 
-    public Category(UUID tenantId, String name, String icon, String color, Boolean hasChildren) {
+    public Category(UUID tenantId, String name, UUID parent, String url, String icon, String color, Integer menuOrder) {
         super();
         this.tenantId = tenantId;
         this.name = name;
+        this.parent = parent;
+        this.url = url;
         this.icon = icon;
         this.color = color;
-        this.hasChildren = hasChildren;
+        this.menuOrder = menuOrder;
     }
 
     public UUID getTenantId() {
@@ -70,11 +74,27 @@ public class Category {
         this.id = id;
     }
 
-    public Boolean getHasChildren() {
-        return hasChildren;
+    public Integer getMenuOrder() {
+        return menuOrder;
     }
 
-    public void setHasChildren(Boolean hasChildren) {
-        this.hasChildren = hasChildren;
+    public void setMenuOrder(Integer menuOrder) {
+        this.menuOrder = menuOrder;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public UUID getParent() {
+        return parent;
+    }
+
+    public void setParent(UUID parent) {
+        this.parent = parent;
     }
 }

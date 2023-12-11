@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AnalyticsApplication {
 
 	public static void main(String[] args) {
+//		SpringApplication application = new SpringApplication(AnalyticsApplication.class);
+//		application.setAdditionalProfiles("ssl");
+//		application.run(args)
 		SpringApplication.run(AnalyticsApplication.class, args);
 	}
 

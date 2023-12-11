@@ -1,15 +1,20 @@
 package com.nextgen.analytics.controllers;
 
 import com.nextgen.analytics.models.Category;
+import com.nextgen.analytics.payload.request.NewCategoryRequest;
 import com.nextgen.analytics.services.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/category")
 public class CategoryController {
     private CategoryService categoryService;
 
@@ -17,9 +22,23 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @PostMapping
+    public ResponseEntity<?> createNewCategory(@Valid @RequestBody NewCategoryRequest categoryRequest) {
+        try {
+            categoryService.newCategory(categoryRequest);
+            return ResponseEntity.ok("OK");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
+    }
     @GetMapping
     public List<Category> getAllCategories()
     {
         return categoryService.getAllCategories();
+    }
+
+    @GetMapping("getCategoryById/{id}")
+    public Optional<Category> getCategoryById(@PathVariable UUID id) {
+        return categoryService.getCategoryById(id);
     }
 }

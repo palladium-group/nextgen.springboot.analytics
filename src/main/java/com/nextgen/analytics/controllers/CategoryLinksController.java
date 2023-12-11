@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/category-links")
 public class CategoryLinksController {
     private CategoryLinksService categoryLinksService;
 

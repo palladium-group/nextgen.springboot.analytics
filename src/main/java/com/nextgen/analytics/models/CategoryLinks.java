@@ -14,8 +14,9 @@ public class CategoryLinks {
     private String name;
     private String url;
     private String color;
+    @Column(nullable = true)
     private UUID parent_id;
-    private Integer order;
+    private Integer columnOrder;
 
     public CategoryLinks(String name, String url, String color, UUID parent_id, Integer order) {
         super();
@@ -23,7 +24,7 @@ public class CategoryLinks {
         this.url = url;
         this.color = color;
         this.parent_id = parent_id;
-        this.order = order;
+        this.columnOrder = order;
     }
 
     public CategoryLinks() {
@@ -63,11 +64,11 @@ public class CategoryLinks {
     }
 
     public Integer getOrder() {
-        return order;
+        return columnOrder;
     }
 
     public void setOrder(Integer order) {
-        this.order = order;
+        this.columnOrder = order;
     }
 
     public UUID getId() {
