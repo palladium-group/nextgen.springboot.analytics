@@ -20,8 +20,8 @@ public class CategoryService {
     public void newCategory(NewCategoryRequest categoryRequest) {
         categoryRepository.save(new Category(categoryRequest.getTenantId(), categoryRequest.getName(), categoryRequest.getParent(), categoryRequest.getUrl(), categoryRequest.getIcon(), categoryRequest.getColor(), categoryRequest.getOrder()));
     }
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<Category> getAllCategories(UUID tenantId) {
+        return categoryRepository.findCategoryByTenantId(tenantId);
     }
 
     public Optional<Category> getCategoryById(UUID id) {

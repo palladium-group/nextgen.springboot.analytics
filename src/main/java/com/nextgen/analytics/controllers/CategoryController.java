@@ -31,10 +31,10 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
         }
     }
-    @GetMapping
-    public List<Category> getAllCategories()
+    @GetMapping("{tenantId}")
+    public List<Category> getAllCategories(@PathVariable UUID tenantId)
     {
-        return categoryService.getAllCategories();
+        return categoryService.getAllCategories(tenantId);
     }
 
     @GetMapping("getCategoryById/{id}")
