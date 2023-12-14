@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/category")
+@CrossOrigin(origins = "*")
 public class CategoryController {
     private CategoryService categoryService;
 
@@ -31,9 +32,9 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
         }
     }
+
     @GetMapping("{tenantId}")
-    public List<Category> getAllCategories(@PathVariable UUID tenantId)
-    {
+    public List<Category> getAllCategories(@PathVariable UUID tenantId) {
         return categoryService.getAllCategories(tenantId);
     }
 
