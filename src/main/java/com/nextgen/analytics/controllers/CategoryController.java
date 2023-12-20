@@ -2,6 +2,7 @@ package com.nextgen.analytics.controllers;
 
 import com.nextgen.analytics.models.Category;
 import com.nextgen.analytics.payload.request.NewCategoryRequest;
+import com.nextgen.analytics.payload.request.UpdateCategoryRequest;
 import com.nextgen.analytics.services.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,16 @@ public class CategoryController {
         }
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<?> updateCategory(@Valid @RequestBody UpdateCategoryRequest updateCategoryRequest) {
+        try {
+            categoryService.updateCategory(updateCategoryRequest);
+            return ResponseEntity.ok("OK");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
+    }
+
     @GetMapping("{tenantId}")
     public List<Category> getAllCategories(@PathVariable UUID tenantId) {
         return categoryService.getAllCategories(tenantId);
@@ -41,5 +52,15 @@ public class CategoryController {
     @GetMapping("getCategoryById/{id}")
     public Optional<Category> getCategoryById(@PathVariable UUID id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @DeleteMapping("deleteCategoryById/{id}")
+    public ResponseEntity<?> deleteCategoryById(@PathVariable UUID id) {
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseEntity.ok("OK");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
     }
 }
